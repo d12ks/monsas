@@ -241,6 +241,83 @@
         </div>
     </div>
 
+    <!-- Modal Edit Akun Peserta -->
+    <div id="edit-akun-modal" class="fixed inset-0 bg-slate-950/60 z-[9985] flex items-center justify-center hidden backdrop-blur-xs p-4">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-200 fade-in">
+            <div class="px-6 py-4 bg-slate-900 text-white flex justify-between items-center border-b border-slate-800">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-8 h-8 rounded-lg bg-blue-600/30 text-blue-400 flex items-center justify-center">
+                        <i class="fas fa-user-pen"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-sm tracking-wide">Edit Data Akun Peserta</h3>
+                        <p class="text-[11px] text-slate-400" id="edit-akun-db-info">Database: -</p>
+                    </div>
+                </div>
+                <button onclick="closeEditAkunModal()" class="text-slate-400 hover:text-white p-1" title="Tutup">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="edit-akun-form" onsubmit="submitEditAkun(event)" class="p-6 space-y-4">
+                <input type="hidden" id="edit-akun-idx">
+                <input type="hidden" id="edit-akun-row-index">
+                <input type="hidden" id="edit-akun-orig-username">
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Username Peserta</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-xs font-mono">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <input type="text" id="edit-akun-username" required class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-mono font-bold text-slate-900 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400" placeholder="Username login">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Kata Sandi (Password)</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-xs">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <input type="password" id="edit-akun-password" required class="w-full pl-9 pr-10 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-mono text-slate-900 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400" placeholder="Kata sandi">
+                        <button type="button" onclick="toggleEditAkunPassword()" class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none" title="Lihat/Sembunyikan Sandi">
+                            <i id="edit-akun-eye-icon" class="fas fa-eye text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nama Lengkap</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-xs">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <input type="text" id="edit-akun-nama" required class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400" placeholder="Nama lengkap siswa">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Kelas</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400 text-xs">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <input type="text" id="edit-akun-kelas" required class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 focus:bg-white focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder:text-slate-400" placeholder="Contoh: X TJKT 1">
+                    </div>
+                </div>
+
+                <div class="pt-2 flex justify-end items-center space-x-2.5 border-t border-slate-100">
+                    <button type="button" onclick="closeEditAkunModal()" class="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:text-slate-800 rounded-xl transition-all">
+                        Batal
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 text-xs font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-xl shadow-xs transition-all flex items-center">
+                        <i class="fas fa-floppy-disk mr-1.5"></i> Simpan Perubahan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Modal Konfigurasi Endpoint API (GAS URL) -->
     <div id="settings-modal" class="fixed inset-0 bg-slate-950/60 z-[9970] flex items-center justify-center hidden backdrop-blur-xs p-4">
         <div class="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-200 fade-in">
@@ -778,7 +855,7 @@
                                         <th class="px-6 py-3.5">Kata Sandi</th>
                                         <th class="px-6 py-3.5">Nama Lengkap</th>
                                         <th class="px-6 py-3.5">Kelas</th>
-                                        <th class="px-6 py-3.5 text-center">Salin</th>
+                                        <th class="px-6 py-3.5 text-center w-36">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody-akun" class="divide-y divide-slate-100">
@@ -967,7 +1044,8 @@
 
         // ========================================================================
         // KAMUS DAN FORMATTER TANGGAL BAHASA INDONESIA BAKU
-        // Dibuat eksplisit agar tidak bergantung pada bahasa sistem / browser
+        // Dibuat mandiri & presisi dengan zona waktu WIB (Asia/Jakarta, UTC+7)
+        // Mencegah masalah format tanggal sistem / browser berbahasa Inggris
         // ========================================================================
         const HARI_INDONESIA = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
         const BULAN_INDONESIA = [
@@ -975,26 +1053,135 @@
             'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
         ];
 
-        // Kamus penerjemah kata bahasa Inggris ke Indonesia untuk pencocokan jadwal
-        const EN_TO_ID_WORDS = {
-            'sunday': 'minggu', 'monday': 'senin', 'tuesday': 'selasa', 'wednesday': 'rabu',
-            'thursday': 'kamis', 'friday': 'jumat', 'saturday': 'sabtu',
-            'january': 'januari', 'february': 'februari', 'march': 'maret', 'april': 'april',
-            'may': 'mei', 'june': 'juni', 'july': 'juli', 'august': 'agustus',
-            'september': 'september', 'october': 'oktober', 'november': 'november', 'december': 'desember',
-            'jan': 'januari', 'feb': 'februari', 'mar': 'maret', 'apr': 'april',
-            'jun': 'juni', 'jul': 'juli', 'aug': 'agustus', 'sep': 'september',
-            'oct': 'oktober', 'nov': 'november', 'dec': 'desember'
-        };
+        // Mendapatkan waktu saat ini dalam zona waktu WIB (UTC+7)
+        function getWIBNow() {
+            const now = new Date();
+            const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+            return new Date(utc + (7 * 3600000));
+        }
+
+        // Parsing segala jenis format tanggal (ISO, Indo, English, DD/MM/YYYY, dsb.)
+        function parseAnyDate(val) {
+            if (!val && val !== 0) return null;
+            if (val instanceof Date && !isNaN(val.getTime())) {
+                const utc = val.getTime() + (val.getTimezoneOffset() * 60000);
+                const dWIB = new Date(utc + (7 * 3600000));
+                return {
+                    year: dWIB.getFullYear(),
+                    month: dWIB.getMonth() + 1,
+                    day: dWIB.getDate(),
+                    dayOfWeek: dWIB.getDay()
+                };
+            }
+
+            const rawStr = String(val).trim();
+            if (!rawStr) return null;
+
+            // 1. Cek format ISO DateTime / Date: YYYY-MM-DD atau dengan T...Z
+            const isoMatch = rawStr.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/);
+            if (isoMatch) {
+                if (rawStr.includes('T')) {
+                    const parsed = new Date(rawStr);
+                    if (!isNaN(parsed.getTime())) {
+                        const utc = parsed.getTime() + (parsed.getTimezoneOffset() * 60000);
+                        const dWIB = new Date(utc + (7 * 3600000));
+                        return {
+                            year: dWIB.getFullYear(),
+                            month: dWIB.getMonth() + 1,
+                            day: dWIB.getDate(),
+                            dayOfWeek: dWIB.getDay()
+                        };
+                    }
+                }
+                const y = parseInt(isoMatch[1], 10);
+                const m = parseInt(isoMatch[2], 10);
+                const d = parseInt(isoMatch[3], 10);
+                const testD = new Date(y, m - 1, d);
+                return { year: y, month: m, day: d, dayOfWeek: testD.getDay() };
+            }
+
+            // 2. Cek format numerik Indonesia: DD/MM/YYYY atau DD-MM-YYYY
+            const dmyMatch = rawStr.match(/^(\d{1,2})[-\/\.](\d{1,2})[-\/\.](\d{4})/);
+            if (dmyMatch) {
+                const d = parseInt(dmyMatch[1], 10);
+                const m = parseInt(dmyMatch[2], 10);
+                const y = parseInt(dmyMatch[3], 10);
+                const testD = new Date(y, m - 1, d);
+                return { year: y, month: m, day: d, dayOfWeek: testD.getDay() };
+            }
+
+            // 3. Cek format tekstual nama bulan (Indonesia maupun Inggris)
+            const monthMap = {
+                'januari': 1, 'january': 1, 'jan': 1,
+                'februari': 2, 'february': 2, 'feb': 2,
+                'maret': 3, 'march': 3, 'mar': 3,
+                'april': 4, 'apr': 4,
+                'mei': 5, 'may': 5,
+                'juni': 6, 'june': 6, 'jun': 6,
+                'juli': 7, 'july': 7, 'jul': 7,
+                'agustus': 8, 'august': 8, 'agu': 8, 'agust': 8, 'aug': 8,
+                'september': 9, 'sep': 9, 'sept': 9,
+                'oktober': 10, 'october': 10, 'okt': 10, 'oct': 10,
+                'november': 11, 'nov': 11,
+                'desember': 12, 'december': 12, 'des': 12, 'dec': 12
+            };
+
+            const cleanStr = rawStr.toLowerCase().replace(/[,.-]/g, ' ');
+            const tokens = cleanStr.split(/\s+/).filter(Boolean);
+
+            let foundDay = null;
+            let foundMonth = null;
+            let foundYear = null;
+
+            for (const t of tokens) {
+                if (!foundMonth && monthMap[t]) {
+                    foundMonth = monthMap[t];
+                    continue;
+                }
+                const num = parseInt(t, 10);
+                if (!isNaN(num)) {
+                    if (num > 1900 && num < 2100) {
+                        foundYear = num;
+                    } else if (num >= 1 && num <= 31 && !foundDay) {
+                        foundDay = num;
+                    }
+                }
+            }
+
+            if (foundDay && foundMonth && foundYear) {
+                const testD = new Date(foundYear, foundMonth - 1, foundDay);
+                return { year: foundYear, month: foundMonth, day: foundDay, dayOfWeek: testD.getDay() };
+            }
+
+            // 4. Fallback ke standard Date parser
+            const fallbackParsed = new Date(rawStr);
+            if (!isNaN(fallbackParsed.getTime())) {
+                const utc = fallbackParsed.getTime() + (fallbackParsed.getTimezoneOffset() * 60000);
+                const dWIB = new Date(utc + (7 * 3600000));
+                return {
+                    year: dWIB.getFullYear(),
+                    month: dWIB.getMonth() + 1,
+                    day: dWIB.getDate(),
+                    dayOfWeek: dWIB.getDay()
+                };
+            }
+
+            return null;
+        }
+
+        // Format ke string tanggal baku Indonesia: "Senin, 12 Oktober 2026"
+        function formatKeTanggalIndonesia(val) {
+            if (!val && val !== 0) return "";
+            const parsed = parseAnyDate(val);
+            if (!parsed) return String(val).trim();
+
+            const hariName = HARI_INDONESIA[parsed.dayOfWeek];
+            const bulanName = BULAN_INDONESIA[parsed.month - 1];
+            return `${hariName}, ${parsed.day} ${bulanName} ${parsed.year}`;
+        }
 
         function getFormatTanggalIndonesia(dateInput = new Date()) {
-            const d = new Date(dateInput);
-            if (isNaN(d.getTime())) return String(dateInput);
-            const hari = HARI_INDONESIA[d.getDay()];
-            const tanggal = d.getDate();
-            const bulan = BULAN_INDONESIA[d.getMonth()];
-            const tahun = d.getFullYear();
-            return `${hari}, ${tanggal} ${bulan} ${tahun}`;
+            return formatKeTanggalIndonesia(dateInput);
         }
 
         // Inisialisasi saat halaman selesai dimuat
@@ -1003,18 +1190,22 @@
             checkSession();
         });
 
-        // Update jam real-time di header
+        // Update jam & tanggal real-time di header (WIB)
         function initClock() {
             const clockEl = document.getElementById('live-clock');
             const dateInfoEl = document.getElementById('current-date-info');
             
             function tick() {
                 const now = new Date();
+                const wibNow = getWIBNow();
+                const tanggalIndo = formatKeTanggalIndonesia(wibNow);
+                const jamWib = now.toLocaleTimeString('id-ID', { hour12: false }) + ' WIB';
+
                 if (clockEl) {
-                    clockEl.innerText = now.toLocaleTimeString('id-ID', { hour12: false }) + ' WIB';
+                    clockEl.innerText = `${tanggalIndo} · ${jamWib}`;
                 }
                 if (dateInfoEl) {
-                    dateInfoEl.innerText = 'Hari ini: ' + getFormatTanggalIndonesia(now);
+                    dateInfoEl.innerText = 'Hari ini: ' + tanggalIndo;
                 }
             }
             tick();
@@ -1809,7 +2000,7 @@
         }
 
         // ====================================================================
-        // 3. MODUL DATA AKUN PESERTA
+        // 3. MODUL DATA AKUN PESERTA (LIHAT, SALIN & EDIT FIELD LENGKAP)
         // ====================================================================
         async function renderAkun() {
             if (!state.selectedDbId) return;
@@ -1830,20 +2021,102 @@
                 let html = '';
                 res.data.forEach((p, idx) => {
                     html += `
-                    <tr class="hover:bg-slate-50 transition-colors">
+                    <tr class="hover:bg-slate-50 transition-colors" id="akun-row-${idx}">
                         <td class="px-6 py-3.5 text-center text-slate-400 font-mono text-[11px]">${idx + 1}</td>
                         <td class="px-6 py-3.5 font-mono font-bold text-slate-900">${p.username}</td>
                         <td class="px-6 py-3.5 font-mono text-slate-700 tracking-wider">${p.password}</td>
                         <td class="px-6 py-3.5 font-semibold text-slate-800">${p.nama}</td>
                         <td class="px-6 py-3.5 text-slate-600">${p.kelas}</td>
-                        <td class="px-6 py-3.5 text-center">
-                            <button onclick="copyCredentials('${p.username}', '${p.password}')" class="p-1.5 text-slate-400 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-colors" title="Salin Akun">
-                                <i class="fas fa-copy"></i>
-                            </button>
+                        <td class="px-6 py-3.5 text-center whitespace-nowrap">
+                            <div class="inline-flex items-center space-x-1.5">
+                                <button onclick="openEditAkunModal(${idx})" class="px-2.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold rounded-lg text-xs transition-colors inline-flex items-center space-x-1" title="Edit Akun Peserta">
+                                    <i class="fas fa-pen-to-square text-[10px]"></i>
+                                    <span>Edit</span>
+                                </button>
+                                <button onclick="copyCredentials('${p.username}', '${p.password}')" class="p-1.5 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-lg transition-colors" title="Salin Akun">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
                         </td>
                     </tr>`;
                 });
                 tbody.innerHTML = html;
+            }
+        }
+
+        function openEditAkunModal(idx) {
+            const akun = state.rawAkunData[idx];
+            if (!akun) return;
+
+            document.getElementById('edit-akun-idx').value = idx;
+            document.getElementById('edit-akun-row-index').value = akun.rowIndex || (idx + 2);
+            document.getElementById('edit-akun-orig-username').value = akun.username;
+            document.getElementById('edit-akun-username').value = akun.username;
+            document.getElementById('edit-akun-password').value = akun.password;
+            document.getElementById('edit-akun-nama').value = akun.nama;
+            document.getElementById('edit-akun-kelas').value = akun.kelas;
+            document.getElementById('edit-akun-db-info').innerText = `Database: ${state.selectedDbName} (Baris ${akun.rowIndex || (idx + 2)})`;
+
+            // Reset field password ke type password
+            const pwdInput = document.getElementById('edit-akun-password');
+            const eyeIcon = document.getElementById('edit-akun-eye-icon');
+            pwdInput.type = 'password';
+            eyeIcon.className = 'fas fa-eye text-xs';
+
+            document.getElementById('edit-akun-modal').classList.remove('hidden');
+        }
+
+        function closeEditAkunModal() {
+            document.getElementById('edit-akun-modal').classList.add('hidden');
+        }
+
+        function toggleEditAkunPassword() {
+            const pwdInput = document.getElementById('edit-akun-password');
+            const eyeIcon = document.getElementById('edit-akun-eye-icon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                eyeIcon.className = 'fas fa-eye-slash text-xs';
+            } else {
+                pwdInput.type = 'password';
+                eyeIcon.className = 'fas fa-eye text-xs';
+            }
+        }
+
+        async function submitEditAkun(event) {
+            event.preventDefault();
+            const idx = parseInt(document.getElementById('edit-akun-idx').value, 10);
+            const rowIndex = parseInt(document.getElementById('edit-akun-row-index').value, 10);
+            const origUsername = document.getElementById('edit-akun-orig-username').value.trim();
+            const newUsername = document.getElementById('edit-akun-username').value.trim();
+            const newPassword = document.getElementById('edit-akun-password').value.trim();
+            const newNama = document.getElementById('edit-akun-nama').value.trim();
+            const newKelas = document.getElementById('edit-akun-kelas').value.trim();
+
+            if (!newUsername || !newPassword || !newNama || !newKelas) {
+                showAlert('Data Kurang Lengkap', 'Seluruh kolom (Username, Kata Sandi, Nama Lengkap, Kelas) wajib diisi.', 'warning');
+                return;
+            }
+
+            const res = await fetchGAS('updateAkun', {
+                dbId: state.selectedDbId,
+                rowIndex: rowIndex,
+                originalUsername: origUsername,
+                akunData: [newUsername, newPassword, newNama, newKelas]
+            });
+
+            if (res && res.status === 'success') {
+                showToast(res.message || 'Data akun berhasil diperbarui!', 'success');
+                closeEditAkunModal();
+
+                // Perbarui memori lokal
+                if (state.rawAkunData[idx]) {
+                    state.rawAkunData[idx].username = newUsername;
+                    state.rawAkunData[idx].password = newPassword;
+                    state.rawAkunData[idx].nama = newNama;
+                    state.rawAkunData[idx].kelas = newKelas;
+                }
+
+                renderAkun();
             }
         }
 
@@ -1942,55 +2215,33 @@
             displayJadwal();
         }
 
-        function normalizeDateStr(str) {
-            if (!str) return "";
-            let s = String(str).toLowerCase().replace(/[.,/\\-]/g, " ").replace(/\s+/g, " ").trim();
-            for (const [en, id] of Object.entries(EN_TO_ID_WORDS)) {
-                s = s.replace(new RegExp(`\\b${en}\\b`, 'g'), id);
-            }
-            return s;
-        }
-
         /**
          * Pengecekan cerdas apakah baris tanggal cocok dengan hari ini
-         * Mendukung format Indonesia murni ("Jumat, 9 Oktober 2026"), format tanpa hari ("9 Oktober 2026"),
-         * format terjemahan ("Friday, 9 October 2026"), format numerik ("09/10/2026"), dan ISO Date.
+         * Berbasis zona waktu Indonesia WIB (Asia/Jakarta, UTC+7).
+         * Mendukung format Indonesia murni ("Senin, 12 Oktober 2026", "12 Oktober 2026"),
+         * format numerik ("12/10/2026", "12-10-2026"), format ISO, maupun format terjemahan.
          */
         function isTodaySchedule(rowDateStr) {
             if (!rowDateStr) return false;
-            const now = new Date();
-            const todayIndo = getFormatTanggalIndonesia(now);
-            const normToday = normalizeDateStr(todayIndo); // e.g. "jumat 9 oktober 2026"
-            const normRow = normalizeDateStr(rowDateStr);
+            const parsedRow = parseAnyDate(rowDateStr);
+            const wibNow = getWIBNow();
+            const todayYear = wibNow.getFullYear();
+            const todayMonth = wibNow.getMonth() + 1;
+            const todayDay = wibNow.getDate();
 
-            // 1. Pencocokan langsung (contoh: "jumat 9 oktober 2026")
-            if (normRow === normToday) return true;
-
-            // 2. Pencocokan tanggal + nama bulan + tahun (contoh: "9 oktober 2026")
-            const day = now.getDate();
-            const monthName = BULAN_INDONESIA[now.getMonth()].toLowerCase();
-            const year = now.getFullYear();
-            const dateMonthYear = `${day} ${monthName} ${year}`;
-            if (normRow.includes(dateMonthYear)) return true;
-
-            // 3. Pencocokan numerik (contoh: "09 10 2026" atau "9 10 2026")
-            const padDay = String(day).padStart(2, '0');
-            const padMonth = String(now.getMonth() + 1).padStart(2, '0');
-            if (normRow.includes(`${padDay} ${padMonth} ${year}`) || normRow.includes(`${day} ${now.getMonth() + 1} ${year}`)) {
-                return true;
+            if (parsedRow) {
+                return (
+                    parsedRow.year === todayYear &&
+                    parsedRow.month === todayMonth &&
+                    parsedRow.day === todayDay
+                );
             }
 
-            // 4. Jika string dapat di-parse sebagai Date
-            const parsed = new Date(rowDateStr);
-            if (!isNaN(parsed.getTime())) {
-                if (parsed.getFullYear() === now.getFullYear() &&
-                    parsed.getMonth() === now.getMonth() &&
-                    parsed.getDate() === now.getDate()) {
-                    return true;
-                }
-            }
-
-            return false;
+            // Fallback kecocokan teks jika parse menghasilkan null
+            const todayIndo = formatKeTanggalIndonesia(wibNow).toLowerCase();
+            const normRow = String(rowDateStr).toLowerCase().replace(/[.,/\\-]/g, " ").replace(/\s+/g, " ").trim();
+            const dayMonthYear = `${todayDay} ${BULAN_INDONESIA[todayMonth - 1].toLowerCase()} ${todayYear}`;
+            return normRow.includes(dayMonthYear);
         }
 
         async function renderJadwal() {
@@ -2040,12 +2291,12 @@
             }
 
             if (schedules.length === 0) {
-                const todayFormatted = getFormatTanggalIndonesia(new Date());
+                const todayFormatted = formatKeTanggalIndonesia(getWIBNow());
                 container.innerHTML = `
                     <div class="text-center py-12 bg-white rounded-3xl border border-dashed border-slate-300">
                         <i class="fas fa-calendar-day text-4xl text-amber-500 mb-3"></i>
                         <p class="text-slate-900 font-bold text-sm">Tidak ada jadwal asesmen untuk hari ini</p>
-                        <p class="text-slate-500 text-xs mt-1">Tanggal sistem: <span class="font-semibold text-slate-700">${todayFormatted}</span></p>
+                        <p class="text-slate-500 text-xs mt-1">Tanggal sistem (WIB): <span class="font-semibold text-slate-700">${todayFormatted}</span></p>
                         <button onclick="setJadwalFilter('all')" class="mt-4 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-xl transition-all">
                             Lihat Semua Jadwal Asesmen (${raw.length})
                         </button>
@@ -2057,6 +2308,7 @@
             schedules.forEach(j => {
                 const rId = j.rowIndex;
                 const d = j.dataRow;
+                const formattedDate = formatKeTanggalIndonesia(d[0]) || d[0];
 
                 html += `
                 <div class="bg-white rounded-3xl border border-slate-200 shadow-xs overflow-hidden flex flex-col">
@@ -2064,7 +2316,7 @@
                     <div class="bg-slate-900 text-white px-6 py-4 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
                         <div class="flex-1 min-w-[240px]">
                             <label class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Hari & Tanggal Asesmen</label>
-                            <input type="text" id="j-${rId}-0" value="${d[0]}" class="w-full font-bold text-white bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+                            <input type="text" id="j-${rId}-0" value="${formattedDate}" class="w-full font-bold text-white bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none">
                         </div>
                         <button onclick="saveJadwal('${major}', ${rId})" class="self-start sm:self-auto bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-xs transition-all active:scale-95 flex items-center">
                             <i class="fas fa-floppy-disk mr-1.5"></i>
@@ -2164,7 +2416,11 @@
             const jadwalData = [];
             for (let i = 0; i < 13; i++) {
                 const inputEl = document.getElementById(`j-${rowIndex}-${i}`);
-                jadwalData.push(inputEl ? inputEl.value.trim() : "");
+                let val = inputEl ? inputEl.value.trim() : "";
+                if (i === 0 && val) {
+                    val = formatKeTanggalIndonesia(val) || val;
+                }
+                jadwalData.push(val);
             }
 
             const res = await fetchGAS('updateJadwal', {
@@ -2185,8 +2441,8 @@
                 return;
             }
             const dateInput = document.getElementById('add-j-date');
-            if (dateInput && !dateInput.value) {
-                dateInput.value = getFormatTanggalIndonesia(new Date());
+            if (dateInput) {
+                dateInput.value = formatKeTanggalIndonesia(getWIBNow());
             }
             document.getElementById('add-schedule-modal').classList.remove('hidden');
         }
@@ -2195,11 +2451,12 @@
         }
 
         async function submitNewSchedule() {
-            const dateStr = document.getElementById('add-j-date').value.trim();
-            if (!dateStr) {
+            const rawDate = document.getElementById('add-j-date').value.trim();
+            if (!rawDate) {
                 showAlert('Data Kurang', 'Hari & Tanggal asesmen wajib diisi.', 'warning');
                 return;
             }
+            const dateStr = formatKeTanggalIndonesia(rawDate) || rawDate;
 
             const row = [
                 dateStr,
