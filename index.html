@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Monitoring Asesmen Sekolah - SMKN 1 MONDOKAN</title>
-    <meta name="description" content="Dashboard Proktor Monitoring & Manajemen Asesmen Sekolah SMKN 1 Mondokan.">
-    <meta property="og:title" content="MONSAS - SMKN 1 MONDOKAN">
+    <title>Monitoring Sistem Asesmen Sekolah - SMKN 1 MONDOKAN</title>
+    <meta name="description" content="Dashboard Proktor Monitoring & Manajemen Asesmen Sekolah SMKN 1 Mondokan">
+    <meta property="og:title" content="Monitoring Asesmen SMKN 1 MONDOKAN">
     <meta property="og:description" content="Dashboard Proktor Monitoring & Manajemen Asesmen Sekolah SMKN 1 Mondokan.">
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="/assets/aistudio/logo_5bcdaf26.png">
@@ -550,8 +550,7 @@
                 <a href="javascript:void(0)" onclick="switchMenu('menu-jadwal')" id="nav-jadwal" class="nav-item group flex items-center px-3.5 py-2.5 text-xs font-bold rounded-xl bg-blue-600 text-white shadow-md transition-all">
                     <i class="fas fa-calendar-days w-5 text-center mr-3 text-sky-300 group-hover:text-white"></i>
                     <span class="flex-1">Jadwal Asesmen</span>
-                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/20 text-white font-mono">Utama</span>
-                </a>
+                   </a>
 
                 <a href="javascript:void(0)" onclick="switchMenu('menu-status')" id="nav-status" class="nav-item group flex items-center px-3.5 py-2.5 text-xs font-bold rounded-xl text-slate-300 hover:bg-slate-800/80 hover:text-white transition-all">
                     <i class="fas fa-tower-broadcast w-5 text-center mr-3 text-slate-400 group-hover:text-blue-400"></i>
@@ -562,8 +561,7 @@
                 <a href="javascript:void(0)" onclick="switchMenu('menu-event')" id="nav-event" class="nav-item group flex items-center px-3.5 py-2.5 text-xs font-bold rounded-xl text-slate-300 hover:bg-slate-800/80 hover:text-white transition-all">
                     <i class="fas fa-tags w-5 text-center mr-3 text-slate-400 group-hover:text-purple-400"></i>
                     <span class="flex-1">Nama Event Asesmen</span>
-                    <span class="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400 font-mono">12 DB</span>
-                </a>
+                    </a>
 
                 <div class="px-3 pt-3 pb-1.5 text-[10px] font-extrabold uppercase tracking-wider text-slate-500">Kontrol Peserta & Pengawasan</div>
 
@@ -866,8 +864,8 @@
                                 <span class="text-[10px] text-slate-400 font-semibold mr-1">Template:</span>
                                 <button type="button" onclick="setBulkEventPreset('PENILAIAN SUMATIF AKHIR SEMESTER (PSAS)')" class="text-[10px] font-bold bg-white/10 hover:bg-white/20 text-white px-2.5 py-1 rounded-lg transition-colors">PSAS</button>
                                 <button type="button" onclick="setBulkEventPreset('PENILAIAN SUMATIF AKHIR TAHUN (PSAT)')" class="text-[10px] font-bold bg-white/10 hover:bg-white/20 text-white px-2.5 py-1 rounded-lg transition-colors">PSAT</button>
-                                <button type="button" onclick="setBulkEventPreset('ASESMEN SUMATIF TENGAH SEMESTER (ASTS)')" class="text-[10px] font-bold bg-white/10 hover:bg-white/20 text-white px-2.5 py-1 rounded-lg transition-colors">ASTS</button>
                                 <button type="button" onclick="setBulkEventPreset('ASESMEN SUMATIF AKHIR SEMESTER (ASAS)')" class="text-[10px] font-bold bg-white/10 hover:bg-white/20 text-white px-2.5 py-1 rounded-lg transition-colors">ASAS</button>
+                                <button type="button" onclick="setBulkEventPreset('ASESMEN SUMATIF TENGAH SEMESTER (ASTS)')" class="text-[10px] font-bold bg-white/10 hover:bg-white/20 text-white px-2.5 py-1 rounded-lg transition-colors">ASTS</button>
                                 <button type="button" onclick="setBulkEventPreset('UJIAN SEKOLAH (US)')" class="text-[10px] font-bold bg-white/10 hover:bg-white/20 text-white px-2.5 py-1 rounded-lg transition-colors">US</button>
                             </div>
                         </div>
@@ -2005,6 +2003,30 @@
             container.innerHTML = html;
         }
 
+        const STUDENT_GAS_URLS = {
+            'X TJKT': 'https://script.google.com/macros/s/AKfycbzsroY3Nvpn4qt31nhv8d3HBbidvj7ZmplYJhOA07MvliuvVBfAowkpQLIGVT87mP0sAA/exec',
+            'X TPFL': 'https://script.google.com/macros/s/AKfycbwJ8c84kAIigjKELMtT9Gu5BRI2-BtzwMpgzEPgOtI1OxIsIuFWs-Hpbtp-Fi4Fs7e7/exec',
+            'X TO': 'https://script.google.com/macros/s/AKfycby-8bldR-dib-xVfyTKH3WdOVSAV1EJW_Q35_hYz1pdSFXYi7r0Zd5GmjzoDzq-h5BD/exec',
+            'X BUSANA': 'https://script.google.com/macros/s/AKfycbz5vHEf5b5M3VTIOi5edaQURpltUB2q14q4WYxgMJgQRwUH0L_kAZoqOoSupAbadksFIw/exec',
+            'XI TJKT': 'https://script.google.com/macros/s/AKfycbxbZ0xsfE0389Gy37wZlG125nyf_NtAgMXTF-NAaRCzAWi8g5WJSPjdoGUOt177Pq31/exec',
+            'XI TPFL': 'https://script.google.com/macros/s/AKfycbxE3liLTYe5vBlkmPyVW0NSHk6lY91_QHCZ5aUkqrSct0nLHhRpb6hRkEDkKWvMP33yXw/exec',
+            'XI TO': 'https://script.google.com/macros/s/AKfycbycc3y4SstcLRKL1nDvbZKZ9_9Inu-9lY2v1Pb8_qUWtQazp6dPWYr7XCRr0-gFSglF/exec',
+            'XI BUSANA': 'https://script.google.com/macros/s/AKfycbwDeFB_iXdfROuoCimtZeBlLKte3jITeuAtMXzFMitYEc0mSu79O_kN_6eTsBTSqJU/exec',
+            'XII TJKT': 'https://script.google.com/macros/s/AKfycbwJUWCbdvbc6gMqrAL5DGYmxfLb2Igyz7kk4snn4wI8ajrFhUNbmhxKJL_XYbvUw9dm2g/exec',
+            'XII TPFL': 'https://script.google.com/macros/s/AKfycbywltuyf8LkTyVbAI6ltBInsHwdLbOlzLCVzEojQXTChvRij_C6JHDCtsZvY45_Fg/exec',
+            'XII TO': 'https://script.google.com/macros/s/AKfycbx6-IdgKaLUTlC8aCoIF8Op5Tv0-EOhz4O2erBrhQ8Qorm6qrI27G2rGc3CWt9tlh0skw/exec',
+            'XII BUSANA': 'https://script.google.com/macros/s/AKfycbzQbYEZPYb6HV9eQxGBM3sorqrv6GuJ-n4khgHJHwHW2wtWnKICrvEcOj4fuzgWTPd5eg/exec'
+        };
+
+        async function clearStudentScheduleCache(dbName) {
+            const key = String(dbName || '').trim().toUpperCase().replace(/_/g, ' ');
+            const targetUrl = STUDENT_GAS_URLS[key];
+            if (!targetUrl) return;
+            try {
+                await fetch(`${targetUrl}?action=clearCache&_=${Date.now()}`, { mode: 'no-cors', cache: 'no-store' });
+            } catch (e) {}
+        }
+
         async function saveJadwal(major, rowIndex) {
             const jadwalData = [];
             for (let i = 0; i < 13; i++) {
@@ -2027,7 +2049,8 @@
             });
 
             if (res && res.status === 'success') {
-                showToast(`Jadwal ${state.selectedDbName} berhasil disimpan!`, 'success');
+                await clearStudentScheduleCache(state.selectedDbName);
+                showToast(`Jadwal ${state.selectedDbName} berhasil disimpan & disinkronkan ke HP siswa!`, 'success');
                 renderJadwal();
             }
         }
@@ -2084,6 +2107,7 @@
             });
 
             if (res && res.status === 'success') {
+                await clearStudentScheduleCache(state.selectedDbName);
                 showToast(res.message, 'success');
                 closeAddScheduleModal();
                 renderJadwal();
