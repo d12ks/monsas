@@ -1904,8 +1904,8 @@
                                 ${isToday ? '<span class="text-[9px] font-extrabold uppercase bg-emerald-500 text-slate-950 px-2 py-0.5 rounded-full">JADWAL HARI INI</span>' : ''}
                             </div>
                             <div class="flex items-center gap-2">
-                                <input type="text" id="j-${rId}-0" value="${formattedDate}" class="flex-1 font-extrabold text-white bg-slate-800/90 border border-slate-700 rounded-xl px-3.5 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none">
-                                <input type="date" onchange="applyDatePickerToInput(this.value, 'j-${rId}-0')" class="bg-slate-800 border border-slate-700 text-slate-200 rounded-xl px-2.5 py-1.5 text-xs cursor-pointer" title="Ubah Tanggal via Kalender">
+                                <input type="text" id="j-${rId}-0" value="${formattedDate}" class="flex-1 font-extrabold text-slate-900 bg-white border border-slate-300 rounded-xl px-3.5 py-2 text-xs focus:ring-2 focus:ring-blue-500 outline-none">
+                                <input type="date" onchange="applyDatePickerToInput(this.value, 'j-${rId}-0')" class="bg-white border border-slate-300 text-slate-900 font-semibold rounded-xl px-2.5 py-1.5 text-xs cursor-pointer focus:ring-2 focus:ring-blue-500 outline-none" title="Ubah Tanggal via Kalender">
                             </div>
                         </div>
                         <button onclick="saveJadwal('${major}', ${rId})" class="self-start sm:self-auto bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl text-xs font-extrabold shadow-md shadow-blue-600/20 transition-all active:scale-95 flex items-center">
